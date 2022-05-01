@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import About from './components/Home/About/About';
+import Blog from './components/Home/Blog/Blog';
+import Home from './components/Home/Home/Home';
+import Navigation from './components/Shared/Navigation/Navigation';
+import Footer from './components/Shared/Footer/Footer';
+import NotFound from './components/Shared/NotFound/NotFound';
+import Login from './components/Shared/Login/Login';
+import Register from './components/Shared/Register/Register';
+import Inventory from './components/Home/Invetory/Inventory';
+
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+       <Navigation></Navigation>
+  
+          <Routes>
+              <Route path="/" element={<Home></Home>} />
+              <Route path="/about" element={<About></About>} />
+              <Route path="/blog" element={<Blog></Blog>} />
+              <Route path="/login" element={<Login></Login>} />
+              <Route path="/register" element={<Register></Register>} />
+              <Route path="*" element={<NotFound></NotFound>} />
+          </Routes>
+        <Footer></Footer>
     </div>
   );
 }
