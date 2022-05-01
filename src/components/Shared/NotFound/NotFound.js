@@ -7,7 +7,7 @@ const NotFound = () => {
             <img src={error} alt="" />
             <h2>Oops! This Page is Not Found.</h2>
             <p><small>The requested page dose not exist.</small></p>
-            <button className="btn btn-primary">Back To Home</button>
+            <button style={{backgroundColor: "#ff5400"}} className="btn text-light">Back To Home</button>
         </div>
     );
 };
