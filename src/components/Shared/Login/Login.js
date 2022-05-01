@@ -1,26 +1,30 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 
 const Login = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-  
-    console.log(watch("example")); // watch input value by passing the name of it
+    
     return (
-        <div>
-             <form onSubmit={handleSubmit(onSubmit)}>
-                {/* register your input into the hook by invoking the "register" function */}
-                <input defaultValue="test" {...register("example")} />
-                <br />
-                
-                {/* include validation with required or other standard HTML validation rules */}
-                <input {...register("exampleRequired", { required: true })} />
-                {/* errors will return when field validation fails  */}
-                {errors.exampleRequired && <span>This field is required</span>}
-                <br />
-                <input className="btn btn-warning" type="submit" value="Login" />
-            </form>
+        <div className="w-50 mx-auto mt-5 bg-light p-5 shadow">
+            <h3 className="text-center">Login</h3>
+                <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email Address:</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Login
+                    </Button>
+                    <br />
+                    <p className="text-dark">Don't Have an Account? 
+                    <br /><Link to="/register">Please Register</Link></p>
+                </Form>
         </div>
     );
 };

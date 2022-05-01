@@ -1,9 +1,14 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const InventoryDetails = (props) => {
 
     const { id, name, description, price, img } = props.inventory;
+    const navigate = useNavigate();
+    const handleInventoryDetail = id =>{
+        navigate(`/inventory/${id}`);
+    }
 
     return (
         <div className="col-md-4 col-sm-12 d-flex justify-content-center g-5">
@@ -14,7 +19,7 @@ const InventoryDetails = (props) => {
                     <Card.Text>
                         {description}
                     </Card.Text>
-                    <Button variant="primary" className="mt-auto">Stock Update</Button>
+                    <Button variant="primary" onClick={()=> handleInventoryDetail(id)} className="mt-auto">Stock Update</Button>
                 </Card.Body>
             </Card>
         </div>
