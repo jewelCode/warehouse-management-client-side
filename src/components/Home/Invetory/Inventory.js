@@ -5,9 +5,9 @@ import InventoryDetails from '../InventoryDetails/InventoryDetails';
 const Inventory = () => {
     const [inventories, setInventories] = useState([]);
     useEffect(() => {
-        fetch('dinner.json')
-        .then(res => res.json())
-        .then(data => setInventories(data));
+        fetch('http://localhost:5000/product')
+            .then(res => res.json())
+            .then(data => setInventories(data));
     }, [])
     return (
         <div className="container">

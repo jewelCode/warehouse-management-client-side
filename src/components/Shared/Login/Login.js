@@ -1,14 +1,23 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
 
 
 const Login = () => {
-    
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
+    if(user){
+        navigate(from, { replace: true });
+    }
     return (
         <div className="w-50 mx-auto mt-5 bg-light p-5 shadow">
-            <h3 className="text-center">Login</h3>
+            <h3 className="text-center">Login:</h3>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email Address:</Form.Label>
@@ -25,6 +34,7 @@ const Login = () => {
                     <p className="text-dark">Don't Have an Account? 
                     <br /><Link to="/register">Please Register</Link></p>
                 </Form>
+            <button onClick={() => signInWithGoogle()}>Google Sign In</button>
         </div>
     );
 };

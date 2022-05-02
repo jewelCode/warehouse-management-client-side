@@ -13,37 +13,31 @@ import InventoryDetails from './components/Home/InventoryDetails/InventoryDetail
 import RequireAuth from './components/Shared/RequireAuth/RequireAuth';
 import AddInventory from './components/Home/AddInventory/AddInventory';
 
-
-
-
-
-
 function App() {
   return (
     <div>
-       <Navigation></Navigation>
-  
-          <Routes>
-              <Route path="/" element={<Home></Home>} />
-              <Route path="/about" element={<About></About>} />
-              <Route path="/blog" element={<Blog></Blog>} />
-              <Route path="/manageInventory" element={<ManageInventory></ManageInventory>} />
-              <Route path="/inventory/:inventoryId" element={
-              <RequireAuth>
-                  <InventoryDetails></InventoryDetails>
-              </RequireAuth>
-              } />
-              <Route path="/login" element={<Login></Login>} />
-              <Route path="/register" element={<Register></Register>} />
-              <Route path="/addInventory" 
-              element={
-                <RequireAuth>
-                      <AddInventory></AddInventory>
-                </RequireAuth>
-              } />
-              <Route path="*" element={<NotFound></NotFound>} />
-          </Routes>
-        <Footer></Footer>
+      <Navigation></Navigation>
+      <Routes>
+        <Route path="/" element={<Home></Home>} />
+        <Route path="/about" element={<About></About>} />
+        <Route path="/blog" element={<Blog></Blog>} />
+        <Route path="/manageInventory" element={<ManageInventory></ManageInventory>} />
+        <Route path="/inventory/:inventoryId" element={
+          <RequireAuth>
+            <InventoryDetails></InventoryDetails>
+          </RequireAuth>
+        } />
+        <Route path="/login" element={<Login></Login>} />
+        <Route path="/register" element={<Register></Register>} />
+        <Route path="/addInventory"
+          element={
+            <RequireAuth>
+              <AddInventory></AddInventory>
+            </RequireAuth>
+          } />
+        <Route path="*" element={<NotFound></NotFound>} />
+      </Routes>
+      <Footer></Footer>
     </div>
   );
 }
