@@ -1,14 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 
 const ManageInventory = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-
-    console.log(watch("example"));
+    
     return (
-        <div>
+        <div className="container mt-5">
             
             <div className="row">
                 <div className="col-md-9 text-center">
@@ -16,14 +14,7 @@ const ManageInventory = () => {
                 </div>
                 <div className="col-md-3">
                     <h2>Manage Inventory</h2>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input placeholder="Product Name" {...register("example")} />
-                        <br />
-                        <input {...register("exampleRequired", { required: true })} />
-                        <br />
-                        {errors.exampleRequired && <span>This field is required</span>}
-                        <input type="submit" value="Add New Items" />
-                    </form>
+                    <Link to="/addInventory">Add New Item</Link>
                 </div>
             </div>
         </div>
