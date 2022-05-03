@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
 
 
 
@@ -13,8 +14,9 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-
-    const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
+    let errorElement;
+   
+   
     
     const [
         signInWithEmailAndPassword,
@@ -23,14 +25,20 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    if (error) {errorElement = <div className="text-danger"><p>Error: {error.message}</p></div>}
     let from = location.state?.from?.pathname || "/";
 
-    if (user || user1) {
+    
+
+    if (user) {
         navigate(from, { replace: true });
     }
+
+ 
     return (
         <div className="w-50 mx-auto mt-5 bg-light p-5 shadow">
             <h3 className="text-center">Login:</h3>
+            
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email Address:</Form.Label>
@@ -49,7 +57,8 @@ const Login = () => {
                 <p className="text-dark">Don't Have an Account?
                     <br /><Link to="/register">Please Register</Link></p>
             </Form>
-            <button onClick={() => signInWithGoogle()}>Google Sign In</button>
+            {errorElement}
+            <GoogleSignIn></GoogleSignIn>
         </div>
     );
 };

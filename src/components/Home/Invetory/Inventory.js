@@ -13,7 +13,7 @@ const Inventory = () => {
         <div className="container">
             <div className="row">
                 {
-                    inventories.map(inventory => <InventoryDetails inventory={inventory} key={inventory.id}></InventoryDetails>)
+                    inventories.map(inventory => <InventoryDetails inventory={inventory} key={inventory._id}></InventoryDetails>)
                 }
             </div>
         </div>
