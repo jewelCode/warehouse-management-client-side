@@ -7,11 +7,15 @@ import auth from '../../../firebase.init';
 
 
 const Login = () => {
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let navigate = useNavigate();
-    let location = useLocation();
-    let from = location.state?.from?.pathname || "/";
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
+    
     const [
         signInWithEmailAndPassword,
         user,
@@ -19,9 +23,9 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    let from = location.state?.from?.pathname || "/";
 
-    if (user) {
+    if (user || user1) {
         navigate(from, { replace: true });
     }
     return (

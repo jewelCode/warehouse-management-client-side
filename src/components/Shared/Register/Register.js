@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, } from 'react-router-dom';
+import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 
 const Register = () => {
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+    const location = useLocation();
     const [
         createUserWithEmailAndPassword,
         user,
@@ -15,6 +19,13 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
 
+    let from = location.state?.from?.pathname || "/login";
+
+    if (user) {
+        alert('User Accout Created Successfully!! Please Login');
+        navigate(from, { replace: true });
+       
+    }
     return (
         <div className="w-50 mx-auto mt-5 bg-light p-5 shadow">
             <h3 className="text-center">Register</h3>
