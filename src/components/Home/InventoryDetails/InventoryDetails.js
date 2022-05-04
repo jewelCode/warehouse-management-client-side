@@ -3,7 +3,6 @@ import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const InventoryDetails = (props) => {
-
     const { _id, name, description, price, img, quantity } = props.inventory;
     const navigate = useNavigate();
     const handleInventoryDetail = id =>{
