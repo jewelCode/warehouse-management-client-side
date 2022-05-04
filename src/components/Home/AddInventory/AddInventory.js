@@ -2,23 +2,37 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddInventory = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        fetch("http://localhost:5000/product", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
 
-    console.log(watch("example"));
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        })
+    };
+
+
     return (
         <div>
             <h3>This is Add Inventory Page</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-                        <input placeholder="Id" {...register("example")} />
+                        <input placeholder="Product Name" {...register("name")} />
                         <br /><br />
-                        <input placeholder="Product Name" {...register("example")} />
+                        <input placeholder="Description" {...register("description")} />
                         <br /><br />
-                        <input placeholder="Description" {...register("example")} />
+                        
+                        <input placeholder="Price" type="number" {...register("price", { required: true })} />
                         <br /><br />
-                        <input placeholder="Image Link" {...register("example")} />
+                        <input placeholder="Image Link" {...register("img")} />
                         <br /><br />
-                        <input placeholder="Price"  {...register("exampleRequired", { required: true })} />
+                        <input placeholder="Quantity" type="number" {...register("quantity")} />
                         <br /><br />
                         <input type="submit" value="Add New Items" />
                         {errors.exampleRequired && <span>This field is required</span>}
