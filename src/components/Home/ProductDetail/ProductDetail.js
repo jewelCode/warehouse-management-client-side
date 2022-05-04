@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+
 import { Link, useParams } from 'react-router-dom';
 
 const ProductDetail = () => {
     const { inventoryId } = useParams();
     const [product, setProduct] = useState({});
+    const [newQuantity, setNewQuantity] = useState({});
  
 
     useEffect(() => {
@@ -13,13 +14,27 @@ const ProductDetail = () => {
             .then(response => response.json())
             .then(data => setProduct(data))
     }, [inventoryId])
+    const handleSubmit = event => {
+        event.preventDefault();
+        const quantity = event.target.quantity.value;
+        const updatedQuantity = {quantity}
 
-    const { register, handleSubmit, watch } = useForm();
-    const onSubmit = data => {
-       
+        const url = `http://localhost:5000/product/${inventoryId}`;
+        
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(updatedQuantity)
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                setNewQuantity(result);
+                event.target.reset();
+            });
     };
 
-    console.log(watch("example")); // watch input value by passing the name of it
     return (
         <div className="container mt-5">
             <div className="row">
@@ -31,10 +46,9 @@ const ProductDetail = () => {
                 </div>
                 <div className="col-md-6">
                     <h3>Restock The Items</h3>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="number" placeholder="Input Product Quantity" {...register("qunatity")} />
-                        <br />
-                        <input type="submit" value="Add Quantity" />
+                    <form onSubmit={handleSubmit}>
+                        <input name="quantity" type="number" />
+                        <input type="submit" />
                     </form>
                 </div>
             </div>

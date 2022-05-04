@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import InventoryDetails from '../InventoryDetails/InventoryDetails';
 
 
-const Inventory = () => {
+const InventoryItems = () => {
     const [inventories, setInventories] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/product')
@@ -20,4 +20,4 @@ const Inventory = () => {
     );
 };
 
-export default Inventory;
+export default InventoryItems;
