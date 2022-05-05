@@ -1,44 +1,47 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Button, Form, Spinner } from 'react-bootstrap';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../../firebase.init';
 import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
 
 
 
+
 const Login = () => {
-    
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const navigate = useNavigate();
     const location = useLocation();
     let errorElement;
-   
-   
-    
+
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
-    if (error) {errorElement = <div className="text-danger"><p>Error: {error.message}</p></div>}
+    if (error) { errorElement = <div className="text-danger"><p>Error: {error.message}</p></div> }
     let from = location.state?.from?.pathname || "/";
 
-    
+    if (loading) {
+        return <div className="text-center"><Spinner animation="border" variant="success" />;</div>
+      }
 
     if (user) {
         navigate(from, { replace: true });
     }
 
- 
+
     return (
         <div className="w-50 mx-auto mt-5 bg-light p-5 shadow">
+
             <h3 className="text-center">Login:</h3>
-            
+
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email Address:</Form.Label>
@@ -56,9 +59,14 @@ const Login = () => {
                 <br />
                 <p className="text-dark">Don't Have an Account?
                     <br /><Link to="/register">Please Register</Link></p>
+                <Link to="/" onClick={async () => {
+                    sendPasswordResetEmail(email);
+                    toast('Sent email');
+                }}>Reset Password</Link>
             </Form>
             {errorElement}
             <GoogleSignIn></GoogleSignIn>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

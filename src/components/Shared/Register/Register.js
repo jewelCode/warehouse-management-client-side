@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -17,10 +17,12 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true });
 
     let from = location.state?.from?.pathname || "/login";
-
+    if (loading) {
+        return <div className="text-center mt-5"><Spinner animation="border" variant="success" />;</div>
+      }
     if (user) {
         alert('User Accout Created Successfully!! Please Login');
         navigate(from, { replace: true });
@@ -46,10 +48,11 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)} 
                         placeholder="Password" />
                 </Form.Group>
-                <Button variant="primary"  onClick={() => createUserWithEmailAndPassword(email, password)}>
+                <Button variant="primary" onClick={() => createUserWithEmailAndPassword(email, password)}>
                     Create Account
                 </Button>
                 <br /><br />
+              
                 <p className="text-dark">Already Have an Account? <Link to="/login">Please Login</Link></p>
             </Form>
         </div>

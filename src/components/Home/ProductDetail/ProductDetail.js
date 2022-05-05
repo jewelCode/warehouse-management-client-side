@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
@@ -6,8 +7,7 @@ const ProductDetail = () => {
     const { inventoryId } = useParams();
     const [product, setProduct] = useState({});
     const [newQuantity, setNewQuantity] = useState({});
-    
- 
+
 
     useEffect(() => {
         const url = `http://localhost:5000/product/${inventoryId}`
@@ -36,13 +36,15 @@ const ProductDetail = () => {
             });
     };
 
-    
+
+         
 
     return (
         <div className="container mt-5">
             <div className="row">
                 <div className="col-md-6 p-5">
                     <div className="p-2 text-light" style={{backgroundColor: "#89C74A"}}>
+        
                         <h4>Name: {product.name}</h4>
                         <h6>Quantity:{product.quantity}</h6>
                         <p>Description: {product.description}</p>
@@ -54,7 +56,7 @@ const ProductDetail = () => {
                     </div>
                     <br />
                     <div className="text-center">
-                    <   button style={{backgroundColor: "#89C74A"}}  className="btn text-light">Delivered</button>
+                    <   button style={{backgroundColor: "#89C74A"}} className="btn text-light">Delivered</button>
                     </div>
                 </div>
                 <div className="col-md-6 ml-4 mt-5">
