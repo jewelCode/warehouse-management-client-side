@@ -39,7 +39,6 @@ const ManageInventory = () => {
                                                 <th>Product Name</th>
                                                 <th>Product Price</th>
                                                 <th>Remove Product</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody >

@@ -5,6 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import './Navigation.css'
+import logo from '../../utilities/Images/logo.png'
 
 const Navigation = () => {
     const [user] = useAuthState(auth);
@@ -16,7 +17,15 @@ const Navigation = () => {
         <div>
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand as={Link} to="/">Logo</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">
+                    <img
+                        alt=""
+                        src={logo}
+                        width="90"
+                        height="90"
+                        className="d-inline-block align-top"
+                        />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -26,8 +35,8 @@ const Navigation = () => {
                             <Nav.Link as={Link} to="/about">About Us</Nav.Link>
                             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
                         </Nav>
-                        {   user ? <button onClick={handleSignOut} className="btn" style={{backgroundColor: "#ff5400"}}> <Link to="/login" className="text-decoration-none text-light">Log Out</Link></button>:
-                            <button className="btn" style={{backgroundColor: "#ff5400"}}> <Link to="/login" className="text-decoration-none text-light">Login</Link></button>}
+                        {   user ? <button onClick={handleSignOut} className="btn" style={{backgroundColor: "#89C74A"}}> <Link to="/login" className="text-decoration-none text-light">Log Out</Link></button>:
+                            <button className="btn" style={{backgroundColor: "#89C74A"}}> <Link to="/login" className="text-decoration-none text-light">Login</Link></button>}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

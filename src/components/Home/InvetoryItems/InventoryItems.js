@@ -10,7 +10,8 @@ const InventoryItems = () => {
             .then(data => setInventories(data));
     }, [])
     return (
-        <div className="container">
+        <div className="container mt-5">
+            <h3 style={{color: "#89C74A"}} className="text-center display-5">Our Products</h3>
             <div className="row">
                 {
                     inventories.map(inventory => <InventoryDetails inventory={inventory} key={inventory._id}></InventoryDetails>)
