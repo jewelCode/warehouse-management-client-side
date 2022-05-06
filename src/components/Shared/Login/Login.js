@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -30,9 +31,10 @@ const Login = () => {
 
     if (loading) {
         return <div className="text-center"><Spinner animation="border" variant="success" />;</div>
-      }
+    }
 
     if (user) {
+
         navigate(from, { replace: true });
     }
 

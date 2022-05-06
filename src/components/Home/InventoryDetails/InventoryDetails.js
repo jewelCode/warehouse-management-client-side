@@ -10,7 +10,7 @@ const InventoryDetails = (props) => {
     }
 
     return (
-        <div className="col-md-3 col-sm-12 d-flex justify-content-center g-5">
+        <div className="col-md-4 col-sm-12 d-flex justify-content-center g-5">
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={img} />
                 <Card.Body className="d-flex flex-column">

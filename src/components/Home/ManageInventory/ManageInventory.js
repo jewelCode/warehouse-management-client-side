@@ -10,17 +10,20 @@ const ManageInventory = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
-    
+
     const handleDelete = id => {
-        const url = `http://localhost:5000/product/${id}`;
-        fetch(url, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const productsRemaining = products.filter(product => product._id !== id);
-                setProducts(productsRemaining)
+        const proceedDelete = window.confirm("Are you sure you want to delete your product?");
+        if (proceedDelete) {
+            const url = `http://localhost:5000/product/${id}`;
+            fetch(url, {
+                method: 'DELETE'
             })
+                .then(res => res.json())
+                .then(data => {
+                    const productsRemaining = products.filter(product => product._id !== id);
+                    setProducts(productsRemaining)
+                })
+        }
     }
 
     return (
@@ -28,28 +31,30 @@ const ManageInventory = () => {
 
             <div className="row">
                 <div className="col-md-9 text-center">
-                    <h2>All Inventory Items</h2>
+                    <h2 className="text-success">All Products</h2>
                     {
                         products.map(product => <div>
                             <Table striped bordered hover>
-                                        <thead >
-                                            <tr className="align-items-center">
-                                                <th>Product Id</th>
-                                                <th>Product Image</th>
-                                                <th>Product Name</th>
-                                                <th>Product Price</th>
-                                                <th>Remove Product</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody >
-                                            <tr className="align-items-center">
-                                                <td>{product._id}</td>
-                                                <td><img style={{width: "100px"}} src={product.img} alt="" /></td>
-                                                <td>{product.name}</td>
-                                                <td>{product.price}</td>
-                                                <td><Button variant="danger" onClick={() => handleDelete(product._id)}>Delete Product</Button></td>
-                                            </tr>
-                                        </tbody>
+                                <thead >
+                                    <tr className="align-items-center text-success">
+                                        <th>Product Id</th>
+                                        <th>Product Image</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>Product Quantity</th>
+                                        <th>Remove Product</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr className="align-items-center">
+                                        <td>{product._id}</td>
+                                        <td><img style={{ width: "100px" }} src={product.img} alt="" /></td>
+                                        <td>{product.name}</td>
+                                        <td>{product.price}</td>
+                                        <td>{product.quantity}</td>
+                                        <td><Button variant="danger" onClick={() => handleDelete(product._id)}>Delete Product</Button></td>
+                                    </tr>
+                                </tbody>
                             </Table>
                         </div>)
                     }

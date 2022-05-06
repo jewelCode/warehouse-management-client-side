@@ -2,49 +2,45 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
+import useProduct from '../../hooks/useProduct';
 
 const ProductDetail = () => {
     const { inventoryId } = useParams();
-    const [product, setProduct] = useState({});
-    const [newQuantity, setNewQuantity] = useState({});
-
-
+    const [product] = useProduct(inventoryId);
+    const [quantity, setQuantity] = useState({});
     useEffect(() => {
         const url = `http://localhost:5000/product/${inventoryId}`
         fetch(url)
             .then(response => response.json())
-            .then(data => setProduct(data))
-    }, [inventoryId])
-    const handleSubmit = event => {
-        event.preventDefault();
-        const quantity = event.target.quantity.value;
-        const updatedQuantity = {quantity}
+            .then(result => {
+                setQuantity(result);
+            })
 
-        const url = `http://localhost:5000/product/${inventoryId}`;
-        
+    }, [inventoryId])
+
+    const handleSubmit = event => {
+        const inputQuantity = event.target.quantity.value;
+        const updatingQuantity = { inputQuantity };
+        const url = `http://localhost:5000/product/${inventoryId}`
         fetch(url, {
             method: 'PUT',
             headers: {
-                'Content-type': 'application/json',
+                'content-type': 'application/json',
             },
-            body: JSON.stringify(updatedQuantity)
+            body: JSON.stringify(updatingQuantity)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('success', data);
+
             })
-            .then((response) => response.json())
-            .then((result) => {
-                setNewQuantity(result);
-                event.target.reset();
-            });
-    };
-
-
-         
+    }
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 shadow">
             <div className="row">
                 <div className="col-md-6 p-5">
-                    <div className="p-2 text-light" style={{backgroundColor: "#89C74A"}}>
-        
+                    <div className="p-2 text-light" style={{ backgroundColor: "#89C74A" }}>
                         <h4>Name: {product.name}</h4>
                         <h6>Quantity:{product.quantity}</h6>
                         <p>Description: {product.description}</p>
@@ -56,19 +52,21 @@ const ProductDetail = () => {
                     </div>
                     <br />
                     <div className="text-center">
-                    <   button style={{backgroundColor: "#89C74A"}} className="btn text-light">Delivered</button>
+                        <   button style={{ backgroundColor: "#89C74A" }} className="btn text-light">Delivered</button>
                     </div>
                 </div>
                 <div className="col-md-6 ml-4 mt-5">
-                    <h3 style={{color: "#89C74A"}} >Restock The Items</h3>
+                    <h3 style={{ color: "#89C74A" }} >Restock The Items</h3>
                     <form onSubmit={handleSubmit}>
                         <input name="quantity" type="number" />
                         <br /><br />
-                        <input className="btn text-light" style={{backgroundColor: "#89C74A"}} type="submit" value="Add New Quantity" />
+                        <input className="btn text-light" style={{ backgroundColor: "#89C74A" }} type="submit" value="Add New Quantity" />
                     </form>
                 </div>
             </div>
-            <Link to="/manageInventory">Manage Inventory</Link>
+            <div className="text-center">
+                <Link to="/manageInventory" className="btn btn-warning text-light">Manage Inventory</Link>
+            </div>
         </div>
     );
 };

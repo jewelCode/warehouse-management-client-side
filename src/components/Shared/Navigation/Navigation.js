@@ -34,6 +34,7 @@ const Navigation = () => {
                             <Nav.Link as={Link} to="/">Home</Nav.Link>
                             <Nav.Link as={Link} to="/about">About Us</Nav.Link>
                             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
+                            {user ? <Nav.Link as={Link} to="/myItems">My Items</Nav.Link> : <></>}
                         </Nav>
                         {   user ? <button onClick={handleSignOut} className="btn" style={{backgroundColor: "#89C74A"}}> <Link to="/login" className="text-decoration-none text-light">Log Out</Link></button>:
                             <button className="btn" style={{backgroundColor: "#89C74A"}}> <Link to="/login" className="text-decoration-none text-light">Login</Link></button>}
