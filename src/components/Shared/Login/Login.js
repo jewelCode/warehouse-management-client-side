@@ -27,6 +27,12 @@ const Login = () => {
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
     if (error) { errorElement = <div className="text-danger"><p>Error: {error.message}</p></div> }
+    const handleSubmit = async event => {
+        await signInWithEmailAndPassword(email, password);
+        const {data} = await axios.post('http://localhost:5000/login', {email});
+        localStorage.setItem('token', data.token)
+        navigate(from, { replace: true });
+    }
     let from = location.state?.from?.pathname || "/";
 
     if (loading) {
@@ -34,8 +40,7 @@ const Login = () => {
     }
 
     if (user) {
-
-        navigate(from, { replace: true });
+        
     }
 
 
@@ -55,7 +60,7 @@ const Login = () => {
                     <Form.Control type="password" value={password}
                         onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 </Form.Group>
-                <Button variant="primary" onClick={() => signInWithEmailAndPassword(email, password)}>
+                <Button variant="primary" onClick={handleSubmit}>
                     Login
                 </Button>
                 <br />

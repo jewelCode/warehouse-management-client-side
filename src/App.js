@@ -4,7 +4,6 @@ import About from './components/Home/About/About';
 import Blog from './components/Home/Blog/Blog';
 import Home from './components/Home/Home/Home';
 import Navigation from './components/Shared/Navigation/Navigation';
-import Footer from './components/Shared/Footer/Footer';
 import NotFound from './components/Shared/NotFound/NotFound';
 import Login from './components/Shared/Login/Login';
 import Register from './components/Shared/Register/Register';

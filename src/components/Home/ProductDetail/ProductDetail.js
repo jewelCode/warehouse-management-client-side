@@ -1,40 +1,56 @@
-
 import React, { useEffect, useState } from 'react';
-
 import { Link, useParams } from 'react-router-dom';
-import useProduct from '../../hooks/useProduct';
 
 const ProductDetail = () => {
     const { inventoryId } = useParams();
-    const [product] = useProduct(inventoryId);
-    const [quantity, setQuantity] = useState({});
+
+    const [product, setProduct] = useState({});
+   
+    // const [quantity, setQuantity] = useState("");
+    // const { quantity } = product;
+
+
     useEffect(() => {
-        const url = `http://localhost:5000/product/${inventoryId}`
+        const url = `http://localhost:5000/product/${inventoryId}`;
         fetch(url)
             .then(response => response.json())
             .then(result => {
-                setQuantity(result);
+                setProduct(result);
             })
 
-    }, [inventoryId])
+    }, [])
 
-    const handleSubmit = event => {
-        const inputQuantity = event.target.quantity.value;
-        const updatingQuantity = { inputQuantity };
-        const url = `http://localhost:5000/product/${inventoryId}`
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(updatingQuantity)
+    const deliveryHandleBtn = () => {
+        fetch(`http://localhost:5000/product/decrease/${inventoryId}`, {
+          method: "PUT",
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log('success', data);
+          .then((res) => res.json())
+          .then((result) => {
+              console.log(result)
+            setProduct({ ...product, quantity: product.quantity - 1 });
+          });
+      };
+    // const { register, handleSubmit } = useForm();
+    const handleRestock = (event) => {
+    event.preventDefault();
+    const value = event.target.restock.value;
 
-            })
-    }
+    fetch(`http://localhost:5000/product/increase/${inventoryId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity: value }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setProduct({
+          ...product,
+          quantity: parseInt(product.quantity) + parseInt(value),
+        });
+      });
+  };
+
 
     return (
         <div className="container mt-5 shadow">
@@ -52,16 +68,21 @@ const ProductDetail = () => {
                     </div>
                     <br />
                     <div className="text-center">
-                        <   button style={{ backgroundColor: "#89C74A" }} className="btn text-light">Delivered</button>
+                        <button onClick={deliveryHandleBtn}>Delivered</button>
+                        <button style={{ backgroundColor: "#89C74A" }} className="btn text-light">Delivered</button>
                     </div>
                 </div>
                 <div className="col-md-6 ml-4 mt-5">
                     <h3 style={{ color: "#89C74A" }} >Restock The Items</h3>
-                    <form onSubmit={handleSubmit}>
-                        <input name="quantity" type="number" />
+                    <form onSubmit={handleRestock}>
+                        <input type="number" name="restock" id="" />
+                        <input type="submit" value="Restock" className="restock-btn" />
+                    </form>
+                    {/* <form onSubmit={handleSubmit(onSubmit)}>
+                        <input type="number" {...register("quantity")} />
                         <br /><br />
                         <input className="btn text-light" style={{ backgroundColor: "#89C74A" }} type="submit" value="Add New Quantity" />
-                    </form>
+                    </form> */}
                 </div>
             </div>
             <div className="text-center">
