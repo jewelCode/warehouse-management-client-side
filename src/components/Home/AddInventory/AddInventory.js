@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddInventory = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         fetch("http://localhost:5000/product", {
             method: "POST",
@@ -18,7 +18,7 @@ const AddInventory = () => {
             })
 
         alert('Product Added successfully')
-        data.target.reset()
+        reset();
 
     };
 
