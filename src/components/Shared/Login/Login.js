@@ -10,6 +10,7 @@ import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
 
 
 
+
 const Login = () => {
 
     const [email, setEmail] = useState('');
@@ -60,7 +61,7 @@ const Login = () => {
                     <Form.Control type="password" value={password}
                         onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 </Form.Group>
-                <Button variant="primary" onClick={handleSubmit}>
+                <Button className="border-0" style={{backgroundColor: "#89C74A"}} onClick={handleSubmit}>
                     Login
                 </Button>
                 <br />

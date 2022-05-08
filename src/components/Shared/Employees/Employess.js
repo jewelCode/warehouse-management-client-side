@@ -22,7 +22,6 @@ const Employess = () => {
                     <img style={{ width: "300px"}}  className="img-fluid" src={accounts} alt="" />
                     <h4>CHEIF ACCOUNTS</h4>
                 </div>
-                
             </div>
         </div>
     );

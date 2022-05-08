@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { FaBeer } from 'react-icons/fa';
 import { Spinner } from 'react-bootstrap';
+import google from '../../../components/utilities/Images/google.png'
 
 
 const GoogleSignIn = () => {
@@ -25,7 +26,9 @@ const GoogleSignIn = () => {
     return (
         <div>
             {errorElement}
-            <button onClick={() => signInWithGoogle()}><FaBeer />Google Sign In</button>
+           <div className="text-center">
+                <button className="btn bg-info" onClick={() => signInWithGoogle()}><img style={{width: '30px', height: '30px'}} src={google}></img> Sign In With Google</button>
+           </div>
 
         </div>
     );

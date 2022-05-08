@@ -32,8 +32,8 @@ const Navigation = () => {
                             className="me-auto my-2 my-lg-0"
                             style={{ maxHeight: '200px' }}>
                             <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/about">About Us</Nav.Link>
                             <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
+                            {user ? <Nav.Link as={Link} to="/manageInventory">Manage Inventory</Nav.Link> : <></>}
                             {user ? <Nav.Link as={Link} to="/myItems">My Items</Nav.Link> : <></>}
                         </Nav>
                         {   user ? <button onClick={handleSignOut} className="btn" style={{backgroundColor: "#89C74A"}}> <Link to="/login" className="text-decoration-none text-light">Log Out</Link></button>:
