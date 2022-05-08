@@ -10,13 +10,13 @@ const MyItems = () => {
     useEffect(() => {
         // const getProducts = async () => {
         //     const email = user.email;
-        //     const url = `http://localhost:5000/myitems?email=${email}`;
+        //     const url = `https://ancient-basin-68398.herokuapp.com///myitems?email=${email}`;
         //     const { data } = await axios.get(url);
         //     setProducts(data)
         // }
         // getProducts();
 
-        fetch('http://localhost:5000/product')
+        fetch('https://ancient-basin-68398.herokuapp.com///product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [user]);
@@ -24,7 +24,7 @@ const MyItems = () => {
     const handleDelete = id => {
         const proceedDelete = window.confirm("Are you sure you want to delete your product?");
         if (proceedDelete) {
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://ancient-basin-68398.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

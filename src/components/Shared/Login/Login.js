@@ -30,7 +30,7 @@ const Login = () => {
     if (error) { errorElement = <div className="text-danger"><p>Error: {error.message}</p></div> }
     const handleSubmit = async event => {
         await signInWithEmailAndPassword(email, password);
-        const {data} = await axios.post('http://localhost:5000/login', {email});
+        const { data } = await axios.post('https://ancient-basin-68398.herokuapp.com/login', { email });
         localStorage.setItem('token', data.token)
         navigate(from, { replace: true });
     }
@@ -41,7 +41,7 @@ const Login = () => {
     }
 
     if (user) {
-        
+
     }
 
 
@@ -61,7 +61,7 @@ const Login = () => {
                     <Form.Control type="password" value={password}
                         onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 </Form.Group>
-                <Button className="border-0" style={{backgroundColor: "#89C74A"}} onClick={handleSubmit}>
+                <Button className="border-0" style={{ backgroundColor: "#89C74A" }} onClick={handleSubmit}>
                     Login
                 </Button>
                 <br />
@@ -74,7 +74,7 @@ const Login = () => {
             </Form>
             {errorElement}
             <GoogleSignIn></GoogleSignIn>
-            
+
         </div>
     );
 };

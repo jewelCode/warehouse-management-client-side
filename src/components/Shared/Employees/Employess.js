@@ -1,6 +1,4 @@
 import React from 'react';
-import { Figure } from 'react-bootstrap';
-import basundara from '../../utilities/Images/bashundhara.png'
 import ceo from '../../utilities/Images/ceo.png'
 import manager from '../../utilities/Images/manager.png'
 import accounts from '../../utilities/Images/accounts.png'

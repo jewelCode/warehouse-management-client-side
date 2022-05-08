@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const ManageInventory = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://ancient-basin-68398.herokuapp.com/product')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, []);
@@ -14,7 +14,7 @@ const ManageInventory = () => {
     const handleDelete = id => {
         const proceedDelete = window.confirm("Are you sure you want to delete your product?");
         if (proceedDelete) {
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://ancient-basin-68398.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

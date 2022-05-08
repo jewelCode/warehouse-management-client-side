@@ -5,7 +5,7 @@ import axios from 'axios';
 const AddInventory = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        fetch("http://localhost:5000/product", {
+        fetch("https://ancient-basin-68398.herokuapp.com/product", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ const AddInventory = () => {
             .then(result => {
                 console.log(result)
             })
-        // axios.post('http://localhost:5000/product', data)
+        // axios.post('https://ancient-basin-68398.herokuapp.com///product', data)
         // .then(response =>{
         //     console.log(response)
         // })

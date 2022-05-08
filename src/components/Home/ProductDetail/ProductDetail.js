@@ -11,7 +11,7 @@ const ProductDetail = () => {
 
 
   useEffect(() => {
-    const url = `http://localhost:5000/product/${inventoryId}`;
+    const url = `https://ancient-basin-68398.herokuapp.com/product/${inventoryId}`;
     fetch(url)
       .then(response => response.json())
       .then(result => {
@@ -21,7 +21,7 @@ const ProductDetail = () => {
   }, [])
 
   const handleDelivery = () => {
-    fetch(`http://localhost:5000/product/delivery/${inventoryId}`, {
+    fetch(`https://ancient-basin-68398.herokuapp.com/product/delivery/${inventoryId}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -34,7 +34,7 @@ const ProductDetail = () => {
   const handleAddQuantity = (event) => {
     event.preventDefault();
     const newQuanity = event.target.quantity.value;
-    fetch(`http://localhost:5000/product/addproduct/${inventoryId}`, {
+    fetch(`https://ancient-basin-68398.herokuapp.com/product/addproduct/${inventoryId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
