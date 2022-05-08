@@ -20,7 +20,7 @@ const ProductDetail = () => {
 
     }, [])
 
-    const deliveryHandleBtn = () => {
+    const handleDelivery = () => {
         fetch(`http://localhost:5000/product/decrease/${inventoryId}`, {
           method: "PUT",
         })
@@ -31,22 +31,22 @@ const ProductDetail = () => {
           });
       };
     // const { register, handleSubmit } = useForm();
-    const handleRestock = (event) => {
+    const handleSubmit = (event) => {
     event.preventDefault();
-    const value = event.target.restock.value;
+    const newQuanity = event.target.quantity.value;
 
     fetch(`http://localhost:5000/product/increase/${inventoryId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity: value }),
+      body: JSON.stringify({ quantity: newQuanity }),
     })
       .then((res) => res.json())
       .then((json) => {
         setProduct({
           ...product,
-          quantity: parseInt(product.quantity) + parseInt(value),
+          quantity: parseInt(product.quantity) + parseInt(newQuanity),
         });
       });
   };
@@ -68,21 +68,17 @@ const ProductDetail = () => {
                     </div>
                     <br />
                     <div className="text-center">
-                        <button onClick={deliveryHandleBtn}>Delivered</button>
-                        <button style={{ backgroundColor: "#89C74A" }} className="btn text-light">Delivered</button>
+                        <button onClick={handleDelivery} style={{ backgroundColor: "#89C74A" }} className="btn text-light">Delivered</button>
                     </div>
                 </div>
                 <div className="col-md-6 ml-4 mt-5">
-                    <h3 style={{ color: "#89C74A" }} >Restock The Items</h3>
-                    <form onSubmit={handleRestock}>
-                        <input type="number" name="restock" id="" />
-                        <input type="submit" value="Restock" className="restock-btn" />
-                    </form>
-                    {/* <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="number" {...register("quantity")} />
-                        <br /><br />
+                    <h3 style={{ color: "#89C74A" }}>Quantity Added</h3>
+                    <form onSubmit={handleSubmit}>
+                        <input type="number" name="quantity"/>
+                        <br />
+                        <br />
                         <input className="btn text-light" style={{ backgroundColor: "#89C74A" }} type="submit" value="Add New Quantity" />
-                    </form> */}
+                    </form>
                 </div>
             </div>
             <div className="text-center">

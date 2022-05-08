@@ -15,15 +15,17 @@ const AddInventory = () => {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-               
             })
-            
+
+        alert('Product Added successfully')
+        data.target.reset()
+
     };
 
 
     return (
-        <div className="container text-center shadow mt-5 p-5 justify-content-center w-25">
-            <h3>Add Your Product</h3>
+        <div className="container bg-success text-center shadow mt-5 p-5 justify-content-center w-25">
+            <h3 className="text-light">Add Your Product</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input className="form-control" placeholder="Product Name" {...register("name")} />
                 <br />
@@ -37,7 +39,7 @@ const AddInventory = () => {
                 <br />
                 <input className="form-control" placeholder="Quantity" type="number" {...register("quantity")} />
                 <br />
-                <input type="submit" value="Add New Items" />
+                <input className="btn btn-warning" type="submit" value="Add New Items" />
                 {errors.exampleRequired && <span>This field is required</span>}
             </form>
 

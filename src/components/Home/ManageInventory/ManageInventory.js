@@ -30,14 +30,13 @@ const ManageInventory = () => {
         <div className="container mt-5">
 
             <div className="row">
-                <div className="col-md-9 text-center">
-                    <h2 className="text-success">All Products</h2>
+                <div className="col-md-9 text-center border p-3">
+                    <h2 className="text-light bg-warning p-3">All Products</h2>
                     {
                         products.map(product => <div>
                             <Table striped bordered hover>
                                 <thead >
                                     <tr className="align-items-center text-success">
-                                        <th>Product Id</th>
                                         <th>Product Image</th>
                                         <th>Product Name</th>
                                         <th>Product Price</th>
@@ -47,7 +46,6 @@ const ManageInventory = () => {
                                 </thead>
                                 <tbody >
                                     <tr className="align-items-center">
-                                        <td>{product._id}</td>
                                         <td><img style={{ width: "100px" }} src={product.img} alt="" /></td>
                                         <td>{product.name}</td>
                                         <td>{product.price}</td>
@@ -60,9 +58,9 @@ const ManageInventory = () => {
                     }
 
                 </div>
-                <div className="col-md-3">
-                    <h2>Manage Inventory</h2>
-                    <Link to="/addInventory">Add New Item</Link>
+                <div className="col-md-3 border text-center">
+                    <h2 className="text-light p-3 bg-warning mt-3">Manage Inventory</h2>
+                    <Link className="btn btn-success mt-5" to="/addInventory">Add New Item</Link>
                 </div>
             </div>
         </div>
