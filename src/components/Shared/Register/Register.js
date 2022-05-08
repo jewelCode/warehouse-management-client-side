@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate, } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
 
@@ -24,7 +25,7 @@ const Register = () => {
         return <div className="text-center mt-5"><Spinner animation="border" variant="success" />;</div>
       }
     if (user) {
-        alert('User Accout Created Successfully!! Please Login');
+        toast('User Accout Created Successfully!! Please Login');
         navigate(from, { replace: true });
        
     }

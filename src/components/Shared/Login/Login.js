@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
 
@@ -74,7 +74,7 @@ const Login = () => {
             </Form>
             {errorElement}
             <GoogleSignIn></GoogleSignIn>
-            <ToastContainer></ToastContainer>
+            
         </div>
     );
 };

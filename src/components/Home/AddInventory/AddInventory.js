@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const AddInventory = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -16,7 +17,10 @@ const AddInventory = () => {
             .then(result => {
                 console.log(result)
             })
-
+        // axios.post('http://localhost:5000/product', data)
+        // .then(response =>{
+        //     console.log(response)
+        // })
         alert('Product Added successfully')
         reset();
 
